@@ -8,7 +8,7 @@ path = os.getcwd()
 fileNames = os.listdir(path)
 
 for fileName in fileNames:
-    fn1, fn2 = fileName.split('.')
-    cmd = '7z a ' + '\"' + fn1 + '.7z' + '\"' + " " + '\"' + fileName + '\"'
+    fn = fileName.split('.')
+    cmd = '7z a ' + '\"' + ''.join(fn[ : -1]) + '.7z' + '\"' + " " + '\"' + fileName + '\"'
     print cmd
     os.system(cmd)
