@@ -9,6 +9,10 @@ fileNames = os.listdir(path)
 
 for fileName in fileNames:
     fn = fileName.split('.')
-    cmd = '7z a ' + '\"' + ''.join(fn[ : -1]) + '.7z' + '\"' + " " + '\"' + fileName + '\"'
+    if len(fn) == 1:
+        name = fileName
+    else:
+        name = ''.join(fn[ : -1])
+    cmd = '7z a ' + '\"' + name + '.7z' + '\"' + " " + "-pxhq021620" + " " + '\"' + fileName + '\"'
     print cmd
     os.system(cmd)
