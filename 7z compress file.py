@@ -13,6 +13,5 @@ for fileName in fileNames:
         name = fileName
     else:
         name = ''.join(fn[ : -1])
-    cmd = '7z a ' + '\"' + name + '.7z' + '\"' + " " + "-pxhq021620" + " " + '\"' + fileName + '\"'
-    print cmd
+    cmd = '7z a ' + '\"' + name + '.7z' + '\"' + " " + "-pxhq021620" + " " + "-mmt2" + " " + '\"' + fileName + '\"'
     os.system(cmd)
