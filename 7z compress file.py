@@ -8,10 +8,13 @@ path = os.getcwd()
 fileNames = os.listdir(path)
 
 for fileName in fileNames:
-    fn = fileName.split('.')
-    if len(fn) == 1:
+    if os.path.isdir(fileName):
         name = fileName
     else:
-        name = ''.join(fn[ : -1])
+        fn = fileName.split('.')
+        if len(fn) == 1:
+            name = fileName
+        else:
+            name = ''.join(fn[ : -1])
     cmd = '7z a ' + '\"' + name + '.7z' + '\"' + " " + "-pxhq021620" + " " + "-mmt2" + " " + '\"' + fileName + '\"'
     os.system(cmd)
