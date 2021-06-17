@@ -3,12 +3,32 @@ docker run -p 6379:6379 --name redis \
 -v /mydata/redis/conf.conf:/etc/redis/redis.conf \
 -d redis redis-server /etc/redis/redis.conf
 
+cjj@ubuntu:/mydata/redis/conf$ cat redis.conf
+appendonly yes
+
+
 docker run -p 3306:3306 --name mysql \
 -v /mydata/mysql/conf:/etc/mysql \
 -v /mydata/mysql/log:/var/log/mysql \
 -v /mydata/mysql/data:/var/lib/mysql \
 -e MYSQL_ROOT_PASSWORD=root \
 -d mysql:5.7
+
+cjj@ubuntu:/mydata/mysql/conf$ cat my.cnf
+[client]
+default-character-set=utf8
+
+[mysql]
+default-character-set=utf8
+
+[mysqld]
+init_connect='SET collation_connection=utf8_unicode_ci'
+init_connect='SET NAMES utf8'
+character-set-server=utf8
+collation-server=utf8_unicode_ci
+skip-character-set-client-handshake
+skip-name-resolve
+
 
 // 要注意elasticsearch文件夹的权限问题
 docker run -p 9200:9200 -p 9300:9300 --name elasticsearch \
@@ -19,3 +39,14 @@ docker run -p 9200:9200 -p 9300:9300 --name elasticsearch \
 -v /mydata/elasticsearch/plugins:/usr/share/elasticsearch/plugins \
 -d elasticsearch:7.4.2
 
+cjj@ubuntu:/mydata/elasticsearch/config$ cat elasticsearch.yml
+http.host: 0.0.0.0
+
+
+docker run -p 5601:5601 --name kibana \
+-v /mydata/kibana/config/kibana.yml:/usr/share/kibana/config/kibana.yml \
+kibana:7.4.2
+
+cjj@ubuntu:/mydata/kibana/config$ cat kibana.yml
+server.host: "0"
+elasticsearch.hosts: [ "http://192.168.64.129:9200" ]
