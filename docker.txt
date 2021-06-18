@@ -50,3 +50,10 @@ kibana:7.4.2
 cjj@ubuntu:/mydata/kibana/config$ cat kibana.yml
 server.host: "0"
 elasticsearch.hosts: [ "http://192.168.64.129:9200" ]
+
+
+docker run -p 80:80 --name nginx \
+-v /mydata/nginx/html:/usr/share/nginx/html \
+-v /mydata/nginx/logs:/var/log/nginx \
+-v /mydata/nginx/conf:/etc/nginx \
+-d nginx:1.10
